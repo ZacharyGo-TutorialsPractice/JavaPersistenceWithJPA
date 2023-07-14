@@ -47,7 +47,7 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
         if (entityManager.contains(employee)) {
             entityManager.remove(employee); // Remove the entity instance.
         } else {
-            entityManager.merge(employee); // Merge the state of the given entity into thecurrent persistence context.
+            entityManager.merge(employee); // Merge the state of the given entity into the current persistence context.
         }
 
         entityManager.getTransaction().commit(); //uncomment if not using @Transactional
