@@ -48,17 +48,27 @@ public class Employee implements Serializable {
     @Transient
     private Double totalCompensation;
 
+    @Column
+    private Salary salary;
+
+    @Column
+    private Company company;
+
     public Employee() {
     }
+    
+    public Employee(Long id, String fName, String lName, Integer yearsExperience, Salary salary, Company company) {
+		this.id = id;
+		this.fName = fName;
+		this.lName = lName;
+		this.yearsExperience = yearsExperience;
+		this.salary = salary;
+		this.company = company;
+	}
 
-    public Employee(Long id, String fName, String lName, Integer yearsExperience) {
-        this.id = id;
-        this.fName = fName;
-        this.lName = lName;
-        this.yearsExperience = yearsExperience;
-    }
 
-    public Long getId() {
+
+	public Long getId() {
         return id;
     }
 
@@ -98,4 +108,21 @@ public class Employee implements Serializable {
         this.totalCompensation = totalCompensation;
     }
 
+	public Salary getSalary() {
+		return salary;
+	}
+
+	public void setSalary(Salary salary) {
+		this.salary = salary;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+    
 }

@@ -25,17 +25,20 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
             }
             entityManager.getTransaction().commit(); //uncomment if not using @Transactional
 
+            System.out.println("Employee saved:" + employee.toString());
             return Optional.of(employee);
         } catch (Exception e) {
             e.printStackTrace();
         }
-		return Optional.empty();
+		System.out.println("Employee failed to saved");
+        return Optional.empty();
 	}
 	
 	// Read Employee 
 	@Override
 	public Optional<Employee> getEmployeeById(Long id) {
 		Employee employee = entityManager.find(Employee.class, id);
+		System.out.println("Employee Info Retreived: " + employee.toString());
         return employee != null ? Optional.of(employee) : Optional.empty();
 	}
 
@@ -46,11 +49,13 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 
         if (entityManager.contains(employee)) {
             entityManager.remove(employee); // Remove the entity instance.
+            System.out.println("Employee Deleted : " + employee.toString());
         } else {
             entityManager.merge(employee); // Merge the state of the given entity into the current persistence context.
         }
 
         entityManager.getTransaction().commit(); //uncomment if not using @Transactional
-	}
+        System.out.println();
+        }
 
 }

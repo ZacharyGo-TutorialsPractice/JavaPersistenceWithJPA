@@ -31,14 +31,6 @@ public class Company implements Serializable {
     public Company() {
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Company(Long id, String city, String state, String zipcode, String country, String name) {
         this.id = id;
         this.city = city;
@@ -48,12 +40,29 @@ public class Company implements Serializable {
         this.name = name;
     }
 
-    public Long getId() {
+	public Company(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [name=" + name + "]";
+	}
+
+	public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getCity() {
