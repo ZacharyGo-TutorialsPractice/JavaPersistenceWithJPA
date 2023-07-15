@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import com.linkedinlearning.jpa.entity.Company;
 import com.linkedinlearning.jpa.entity.Employee;
-import com.linkedinlearning.jpa.entity.EmployeeProfile;
 import com.linkedinlearning.jpa.entity.Salary;
 import com.linkedinlearning.jpa.repository.CompanyRepositoryImpl;
 import com.linkedinlearning.jpa.repository.EmployeeRepositoryImpl;
@@ -42,8 +41,8 @@ public class Main {
         employee2.setYearsExperience(5);*/
 
         //set employment history
-        /*employee.setCompanies(generateCompanies());
-        employee2.setCompanies(generateCompanies());*/
+        employee.setCompanies(generateCompanies());
+        /*employee2.setCompanies(generateCompanies());*/
 
         //create an EmployeeProfile and associate it to an Employee
         /*employee.setProfile(new EmployeeProfile("userName", "password!", "email@email.com", employee, "Software Engineer"));
@@ -90,7 +89,6 @@ public class Main {
 		employee.setfName("Mary");
 		employee.setlName("Doe");
 		employee.setYearsExperience(20);
-		employee.setCompany(company);
 		
 		// save Employees
 		// Optional<Employee> savedEmployee =
@@ -109,7 +107,6 @@ public class Main {
 		employee.setfName("John");
 		employee.setlName("Doe");
 		employee.setYearsExperience(25);
-		employee.setCompany(company);
 		
 		// save Employees
 		// Optional<Employee> savedEmployee =
@@ -147,7 +144,17 @@ public class Main {
 		salaries.add(currentSalary);
 		salaries.add(historicalSalary1);
 		salaries.add(historicalSalary2);
-
 		return salaries;
 	}
+	
+	private static List<Company> generateCompanies() {
+        Company company1 = new Company("Google", "USA");
+        Company company2 = new Company("Amazon", "USA");
+
+        List<Company> companies = new ArrayList<>();
+        companies.add(company1);
+        companies.add(company2);
+
+        return companies;
+    }
 }

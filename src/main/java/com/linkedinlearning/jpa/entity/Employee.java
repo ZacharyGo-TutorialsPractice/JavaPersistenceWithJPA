@@ -11,8 +11,9 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 /*
@@ -65,8 +66,15 @@ public class Employee implements Serializable {
     @JoinColumn(name = "employee_id")
     private List<Salary> salaries = new ArrayList<>();
 
-    @Column
-    private Company company;
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(name = "employee_company",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "company_id")
+    )
+    private List<Company> companies = new ArrayList<>();
 
     /*@OneToOne(mappedBy="employee")
     private EmployeeProfile profile;*/
@@ -86,7 +94,7 @@ public class Employee implements Serializable {
 		this.profile = profile;
 	}*/
 
-	public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
+	/*public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
 			List<Salary> salaries, Company company) {
 		this.id = id;
 		this.fName = fName;
@@ -95,13 +103,25 @@ public class Employee implements Serializable {
 		this.totalCompensation = totalCompensation;
 		this.salaries = salaries;
 		this.company = company;
+	}*/
+
+    public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
+			List<Salary> salaries, List<Company> companies) {
+		this.id = id;
+		this.fName = fName;
+		this.lName = lName;
+		this.yearsExperience = yearsExperience;
+		this.totalCompensation = totalCompensation;
+		this.salaries = salaries;
+		this.companies = companies;
 	}
 
 	public Long getId() {
         return id;
     }
 
-    public String getfName() {
+    
+	public String getfName() {
         return fName;
     }
 
@@ -138,16 +158,16 @@ public class Employee implements Serializable {
     }
 
 	
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
 	public List<Salary> getSalaries() {
 		return salaries;
+	}
+
+	public List<Company> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(List<Company> companies) {
+		this.companies = companies;
 	}
 
 	public void setSalaries(List<Salary> salaries) {

@@ -1,8 +1,16 @@
 package com.linkedinlearning.jpa.entity;
 
-import jakarta.persistence.*;
-
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "companies")
@@ -28,6 +36,9 @@ public class Company implements Serializable {
     @Column
     private String country;
 
+    @ManyToMany(mappedBy = "companies")
+    private List<Employee> employees = new ArrayList<>();
+
     public Company() {
     }
 
@@ -38,6 +49,11 @@ public class Company implements Serializable {
         this.zipcode = zipcode;
         this.country = country;
         this.name = name;
+    }
+
+    public Company(String name, String country) {
+        this.name = name;
+        this.country = country;
     }
 
 	public Company(String name) {

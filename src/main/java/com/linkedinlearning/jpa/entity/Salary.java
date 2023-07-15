@@ -33,6 +33,10 @@ public class Salary implements Serializable {
     @Column
     private String title;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    /* By default, the many-to-one association uses the fetch type of EAGER and that strategy can lead to N+ query issues. Basically, fetching more data than necessary. */
+    private Employee employee;
+    
     public Salary() {
     }
 
