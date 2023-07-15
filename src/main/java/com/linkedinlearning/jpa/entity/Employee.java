@@ -4,18 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 /*
  *  In order for a class to be considered a JPA entity, at a minimum, it needs the entity annotation. 
  *  A public or protected no argument constructor and the class must not be declared final and no methods 
@@ -24,6 +13,15 @@ import jakarta.persistence.Transient;
  */
 @Entity
 @Table(name = "employees")
+//@Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
+/*  The single table strategy. All the classes in a hierarchy are mapped to a single table.*/ 
+//@Inheritance(strategy=InheritanceType.JOINED) 
+/*  The joined subclass strategy. the root of the class hierarchy is represented by a single table, 
+ 	while each subclass is represented by a separate table that contains the fields that are specific to the subclass and the primary key column. I*/
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+/* 	In the table per class strategy, each class is mapped to a separate table. All of the fields of the class, including those inherited, 
+ * 	are mapped to columns of the table for that class. In this strategy, the superclass and subclass in a hierarchy are mapped to different individual tables. 
+ * All super and subclass tables store all fields that the class needs plus the ones which are inherited from the superclass.*/
 public class Employee implements Serializable {
 
     @Id // The @Id annotation identifies the unique identifier for the object. 
@@ -82,29 +80,6 @@ public class Employee implements Serializable {
     public Employee() {
     }
     
-	/*public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
-			List<Salary> salaries, Company company, EmployeeProfile profile) {
-		this.id = id;
-		this.fName = fName;
-		this.lName = lName;
-		this.yearsExperience = yearsExperience;
-		this.totalCompensation = totalCompensation;
-		this.salaries = salaries;
-		this.company = company;
-		this.profile = profile;
-	}*/
-
-	/*public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
-			List<Salary> salaries, Company company) {
-		this.id = id;
-		this.fName = fName;
-		this.lName = lName;
-		this.yearsExperience = yearsExperience;
-		this.totalCompensation = totalCompensation;
-		this.salaries = salaries;
-		this.company = company;
-	}*/
-
     public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
 			List<Salary> salaries, List<Company> companies) {
 		this.id = id;
@@ -113,6 +88,15 @@ public class Employee implements Serializable {
 		this.yearsExperience = yearsExperience;
 		this.totalCompensation = totalCompensation;
 		this.salaries = salaries;
+		this.companies = companies;
+	}
+
+    
+	public Employee(Long id, String fName, String lName, Integer yearsExperience, List<Company> companies) {
+		this.id = id;
+		this.fName = fName;
+		this.lName = lName;
+		this.yearsExperience = yearsExperience;
 		this.companies = companies;
 	}
 

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.linkedinlearning.jpa.entity.ActiveEmployee;
 import com.linkedinlearning.jpa.entity.Company;
 import com.linkedinlearning.jpa.entity.Employee;
+import com.linkedinlearning.jpa.entity.RetiredEmployee;
 import com.linkedinlearning.jpa.entity.Salary;
 import com.linkedinlearning.jpa.repository.CompanyRepositoryImpl;
 import com.linkedinlearning.jpa.repository.EmployeeRepositoryImpl;
@@ -30,19 +32,21 @@ public class Main {
 
 		// Example02ManagingEntities(entityManager);
 
-		Employee employee = new Employee();
+		ActiveEmployee employee = new ActiveEmployee();
         employee.setfName("Mary");
         employee.setlName("Johnson");
         employee.setYearsExperience(20);
 
-        /*Employee employee2 = new Employee();
+        RetiredEmployee employee2 = new RetiredEmployee();
         employee2.setfName("John");
         employee2.setlName("Doe");
-        employee2.setYearsExperience(5);*/
+        employee2.setYearsExperience(5);
+        employee2.setPension(true);
+        employee2.setYearsOfService(4);
 
         //set employment history
         employee.setCompanies(generateCompanies());
-        /*employee2.setCompanies(generateCompanies());*/
+        employee2.setCompanies(generateCompanies());
 
         //create an EmployeeProfile and associate it to an Employee
         /*employee.setProfile(new EmployeeProfile("userName", "password!", "email@email.com", employee, "Software Engineer"));
@@ -50,11 +54,11 @@ public class Main {
 
         //set salaries
         employee.setSalaries(generateSalaries());
-        //employee2.setSalaries(generateSalaries());
+        employee2.setSalaries(generateSalaries());
 
         //save Employee
         employeeRepository.save(employee);
-        //employeeRepository.save(employee2);
+        employeeRepository.save(employee2);
         
 		entityManager.close();
 		entityManagerFactory.close();
