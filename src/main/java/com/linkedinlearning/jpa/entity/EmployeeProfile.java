@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 
 @Entity
 public class EmployeeProfile implements Serializable {
-	@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="profile_id")
     private Long id;
@@ -87,3 +87,4 @@ public class EmployeeProfile implements Serializable {
         this.title = title;
     }
 }
+

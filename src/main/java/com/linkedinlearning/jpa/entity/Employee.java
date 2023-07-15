@@ -15,10 +15,10 @@ import jakarta.persistence.*;
 @Table(name = "employees")
 //@Inheritance(strategy=InheritanceType.SINGLE_TABLE) 
 /*  The single table strategy. All the classes in a hierarchy are mapped to a single table.*/ 
-//@Inheritance(strategy=InheritanceType.JOINED) 
+@Inheritance(strategy=InheritanceType.JOINED) 
 /*  The joined subclass strategy. the root of the class hierarchy is represented by a single table, 
  	while each subclass is represented by a separate table that contains the fields that are specific to the subclass and the primary key column. I*/
-@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 /* 	In the table per class strategy, each class is mapped to a separate table. All of the fields of the class, including those inherited, 
  * 	are mapped to columns of the table for that class. In this strategy, the superclass and subclass in a hierarchy are mapped to different individual tables. 
  * All super and subclass tables store all fields that the class needs plus the ones which are inherited from the superclass.*/
@@ -74,10 +74,11 @@ public class Employee implements Serializable {
     )
     private List<Company> companies = new ArrayList<>();
 
-    /*@OneToOne(mappedBy="employee")
-    private EmployeeProfile profile;*/
+    @OneToOne(mappedBy="employee")
+    private EmployeeProfile profile;
     
-    public Employee() {
+    
+	public Employee() {
     }
     
     public Employee(Long id, String fName, String lName, Integer yearsExperience, Double totalCompensation,
@@ -157,8 +158,8 @@ public class Employee implements Serializable {
 	public void setSalaries(List<Salary> salaries) {
 		this.salaries = salaries;
 	}
-
-	/*public EmployeeProfile getProfile() {
+	
+	public EmployeeProfile getProfile() {
 		return profile;
 	}
 
@@ -166,5 +167,5 @@ public class Employee implements Serializable {
 		this.profile = profile;
 	}
 
-    */
+	
 }

@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.linkedinlearning.jpa.entity.ActiveEmployee;
 import com.linkedinlearning.jpa.entity.Company;
 import com.linkedinlearning.jpa.entity.Employee;
+import com.linkedinlearning.jpa.entity.EmployeeProfile;
 import com.linkedinlearning.jpa.entity.RetiredEmployee;
 import com.linkedinlearning.jpa.entity.Salary;
 import com.linkedinlearning.jpa.repository.CompanyRepositoryImpl;
@@ -49,8 +50,8 @@ public class Main {
         employee2.setCompanies(generateCompanies());
 
         //create an EmployeeProfile and associate it to an Employee
-        /*employee.setProfile(new EmployeeProfile("userName", "password!", "email@email.com", employee, "Software Engineer"));
-        employee2.setProfile(new EmployeeProfile("jDoe", "password234", "johndoe@email.com", employee, "Project Manager"));*/
+        employee.setProfile(new EmployeeProfile("userName", "password!", "email@email.com", employee, "Software Engineer"));
+        employee2.setProfile(new EmployeeProfile("jDoe", "password234", "johndoe@email.com", employee, "Project Manager"));
 
         //set salaries
         employee.setSalaries(generateSalaries());

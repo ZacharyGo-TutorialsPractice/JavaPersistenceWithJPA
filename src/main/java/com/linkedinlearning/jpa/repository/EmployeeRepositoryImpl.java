@@ -19,6 +19,9 @@ public class EmployeeRepositoryImpl implements EmployeeRepository {
 		try {
             entityManager.getTransaction().begin(); //uncomment if not using @Transactional
             if (employee.getId() == null) {
+            	if (employee.getProfile()!=null) 
+            		entityManager.persist(employee.getProfile());
+            	
                 entityManager.persist(employee); // Make an instance managed and persistent.
             } else {
                 employee = entityManager.merge(employee); // Merge the state of the given entity into thecurrent persistence context.
