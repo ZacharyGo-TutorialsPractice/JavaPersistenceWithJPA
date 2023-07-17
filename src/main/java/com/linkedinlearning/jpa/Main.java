@@ -61,6 +61,10 @@ public class Main {
         employeeRepository.save(employee);
         employeeRepository.save(employee2);
         
+        // Delete Employee 4
+        Employee employeeDelete = employeeRepository.getEmployeeById(Long.valueOf(9)).get();
+ 		employeeRepository.deleteEmployee(employeeDelete);
+ 		
 		entityManager.close();
 		entityManagerFactory.close();
 
